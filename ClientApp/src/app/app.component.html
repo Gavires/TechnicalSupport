@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Angular in ASP.NET Core</title>
+</head>
+<body>
+    <div>
+        <div class="form-group">
+            <label>Ваше имя:</label>
+            <input class="form-control" name="contact.name" [(ngModel)]="contact.name" />
+        </div>
+        <div class="form-group">
+            <label>Ваш Email:</label>
+            <input class="form-control" name="contact.email" [(ngModel)]="contact.email" />
+        </div>
+        <div class="form-group">
+            <label>Ваш Телефон:</label>
+            <input type="number" class="form-control" name="contact.phone" [(ngModel)]="contact.phone" />
+        </div>
+        <div class="form-group">
+            <label>Тема:</label>
+            <select class="form-control" name="dictSubjectMessage" [(ngModel)]="dictSubjectMessage">
+                <option *ngFor="let item of dictSubjectMessage" [value]="item">
+                    {{item.subject}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <!--<button class="btn btn-default" (click)="addPhone()">Добавить</button>-->
+            <button class="btn btn-default">Добавить</button>
+        </div>
+    </div>
+    <div>
+        <!--<h3>Добавленные элементы</h3>
+        <ul>
+            <li *ngFor="let p of phones">{{p.title}} ({{p.company}}) - {{p.price}}</li>
+        </ul>-->
+    </div>`
+
+</body>
+</html>

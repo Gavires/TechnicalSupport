@@ -5,17 +5,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { Contacts } from './contacts';
 let AppComponent = class AppComponent {
-    constructor() {
-        this.name = '';
+    constructor(dataService) {
+        this.dataService = dataService;
+        this.contact = new Contacts(); // изменяемый товар
+        this.tableMode = true; // табличный режим
+    }
+    ngOnInit() {
+        this.loadContact(); // загрузка данных при старте компонента  
+        this.loadDictSubjectMessage();
+    }
+    // получаем данные через сервис
+    loadContact() {
+        this.dataService.getContacts()
+            .subscribe((data) => this.contact = data);
+    }
+    loadDictSubjectMessage() {
+        this.dataService.getDictSubjectMessage()
+            .subscribe((data) => this.dictSubjectMessage = data);
     }
 };
 AppComponent = __decorate([
     Component({
         selector: 'app',
-        template: `<label>Введите имя:</label>
-                 <input [(ngModel)]="name" placeholder="name">
-                 <h2>Добро пожаловать {{name}}!</h2>`
+        templateUrl: './app.component.html',
+        providers: [DataService]
     })
 ], AppComponent);
 export { AppComponent };
