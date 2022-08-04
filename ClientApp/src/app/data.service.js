@@ -19,8 +19,8 @@ let DataService = class DataService {
     getDictSubjectMessage() {
         return this.http.get(this.url + '/' + "getDictSubjectMessage");
     }
-    createContact(contacts) {
-        return this.http.post(this.url, contacts);
+    createContact(contactsModel) {
+        return this.http.post(this.url, contactsModel);
     }
     updateContact(contacts) {
         return this.http.put(this.url, contacts);

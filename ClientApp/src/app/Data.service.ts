@@ -1,6 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Contacts } from './contacts';
+import { ContactModel } from './contactModel';
 
 @Injectable()
 export class DataService {
@@ -21,8 +22,8 @@ export class DataService {
         return this.http.get(this.url + '/' + "getDictSubjectMessage");
     }
 
-    createContact(contacts: Contacts) {
-        return this.http.post(this.url, contacts);
+    createContact(contactsModel: ContactModel) {
+        return this.http.post(this.url, contactsModel);
     }
 
     updateContact(contacts: Contacts) {

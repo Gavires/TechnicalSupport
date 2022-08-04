@@ -14,9 +14,9 @@ namespace TechnicalSupport.Controllers {
         public ContactsController(DataBaseContext _db) {
             db = _db;
             if (!db.Contacts.Any()) {
-                db.Contacts.Add(new Contacts { Name = "Igor", Email = "Igor@ya.ru", Phone = "896062" });
-                db.Contacts.Add(new Contacts { Name = "Dmitry", Email = "Dmitry@ya.ru", Phone = "895265" });
-                db.Contacts.Add(new Contacts { Name = "Sanya", Email = "Sanya@ya.ru", Phone = "894068" });
+                db.Contacts.Add(new Contacts { Name = "Igor", Email = "Igor@ya.ru", Phone = 896062 });
+                db.Contacts.Add(new Contacts { Name = "Dmitry", Email = "Dmitry@ya.ru", Phone = 895265 });
+                db.Contacts.Add(new Contacts { Name = "Sanya", Email = "Sanya@ya.ru", Phone = 894068 });
                 db.SaveChanges();
             }
 
@@ -50,11 +50,17 @@ namespace TechnicalSupport.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Post(ContactModel contact) {
+        public IActionResult Post(ContactModel contactsModel) {
             if (ModelState.IsValid) {
-                db.Contacts.Add(contact.Contacts);
+                var mess = new Messages();
+                mess.SubjectMessageId = long.Parse(contactsModel.SubjectId);
+                mess.Text = contactsModel.Messages.Text;
+                db.Messages.Add(mess);
                 db.SaveChanges();
-                return Ok(contact);
+                contactsModel.Contacts.MessageId = mess.Id;
+                db.Contacts.Add(contactsModel.Contacts);
+                db.SaveChanges();
+                return Ok(contactsModel);
             }
             return BadRequest(ModelState);
         }
@@ -72,7 +78,7 @@ namespace TechnicalSupport.Controllers {
     
     public class ContactModel {
         public Contacts Contacts { get; set; }
-        public List<DictSubjectMessage> DictSubjectMessage { get; set; }
+        public string SubjectId { get; set; }
         public Messages Messages { get; set; } 
     }
 }

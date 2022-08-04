@@ -1,8 +1,8 @@
 ﻿export class Contacts {
     constructor(
-        public id?: number,
+        public id?: bigint,
         public name?: string,
         public email?: string,
-        public phone?: string,
-        public dictSubjectMessageId?: number ) { }
+        public phone?: bigint,
+        public MessageId?: bigint ) { }
 }

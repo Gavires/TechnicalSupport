@@ -1,8 +1,7 @@
 export class DictSubjectMessage {
-    constructor(id, subject, messageId) {
+    constructor(id, subject) {
         this.id = id;
         this.subject = subject;
-        this.messageId = messageId;
     }
 }
 //# sourceMappingURL=dictSubjectMessage.js.map

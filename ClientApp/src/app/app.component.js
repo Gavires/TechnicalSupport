@@ -7,10 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { Contacts } from './contacts';
+import { ContactModel } from './contactModel';
+import { Messages } from './messages';
 let AppComponent = class AppComponent {
     constructor(dataService) {
         this.dataService = dataService;
         this.contact = new Contacts(); // изменяемый товар
+        this.newContact = new Contacts(); // изменяемый товар
+        this.contactModel = new ContactModel(new Contacts(), "", new Messages());
+        /*num: bigint = 100n;*/
         this.tableMode = true; // табличный режим
     }
     ngOnInit() {
@@ -25,6 +30,11 @@ let AppComponent = class AppComponent {
     loadDictSubjectMessage() {
         this.dataService.getDictSubjectMessage()
             .subscribe((data) => this.dictSubjectMessage = data);
+    }
+    createContact(contactModel, subjectId) {
+        this.contactModel.subjectId = subjectId;
+        this.dataService.createContact(this.contactModel)
+            .subscribe();
     }
 };
 AppComponent = __decorate([
