@@ -8,17 +8,28 @@
 </head>
 <body>
     <div>
-        <div class="form-group">
+        <div class="form-group" style="width:50%">
             <label>Ваше имя:</label>
-            <input class="form-control" name="contactModel.contacts.name" [(ngModel)]="contactModel.contacts.name" />
+            <input class="form-control" name="name" [(ngModel)]="contactModel.contacts.name" #name="ngModel" required />
+            <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+                Не указано имя
+            </div>
         </div>
         <div class="form-group">
             <label>Ваш Email:</label>
-            <input class="form-control" name="contactModel.contacts.email" [(ngModel)]="contactModel.contacts.email" />
+            <input class="form-control" name="email" [(ngModel)]="contactModel.contacts.email" #email="ngModel"
+                   required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+            <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+                Некорректный email
+            </div>
         </div>
         <div class="form-group">
             <label>Ваш Телефон:</label>
-            <input type="number" class="form-control" name="contactModel.contacts.phone" [(ngModel)]="contactModel.contacts.phone" />
+            <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
+                   required pattern="[0-9]{10}" />
+            <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
+                Некорректный телефон
+            </div>
         </div>
         <div class="form-group">
             <label>Тема:</label>
@@ -30,10 +41,13 @@
         </div>
         <div class="form-group">
             <label>Сообщение:</label>
-            <input class="form-control" name="contactModel.messages.text" [(ngModel)]="contactModel.messages.text" />
+            <input class="form-control" name="text" [(ngModel)]="contactModel.messages.text" #text="ngModel" required />
+            <div [hidden]="text.valid || text.untouched" class="alert alert-danger">
+                Напишите хоть строчку.......
+            </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-default" (click)="createContact(contactModel, subjectMessage)">Добавить</button>
+            <button [disabled]="name.invalid || email.invalid || phone.invalid"  class="btn btn-default" (click)="createContact(subjectMessage)">Добавить</button>
             <!--<button class="btn btn-default">Добавить</button>-->
         </div>
     </div>

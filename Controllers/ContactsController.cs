@@ -52,9 +52,10 @@ namespace TechnicalSupport.Controllers {
         [HttpPost]
         public IActionResult Post(ContactModel contactsModel) {
             if (ModelState.IsValid) {
-                var mess = new Messages();
-                mess.SubjectMessageId = long.Parse(contactsModel.SubjectId);
-                mess.Text = contactsModel.Messages.Text;
+                var mess = new Messages {
+                    SubjectMessageId = long.Parse(contactsModel.SubjectId),
+                    Text = contactsModel.Messages.Text
+                };
                 db.Messages.Add(mess);
                 db.SaveChanges();
                 contactsModel.Contacts.MessageId = mess.Id;

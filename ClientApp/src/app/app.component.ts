@@ -4,7 +4,6 @@ import { Contacts } from './contacts';
 import { DictSubjectMessage } from './dictSubjectMessage';
 import { ContactModel } from './contactModel';
 import { Messages } from './messages';
-import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app',
@@ -13,21 +12,17 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
-    contact: Contacts = new Contacts();   // изменяемый товар
-    newContact: Contacts = new Contacts();   // изменяемый товар
-    /*dictSubjectMessage: DictSubjectMessage[] = [{ Subject: "Техподдержка" }, { Subject: "Менеджер" }, { Subject: "Менеджер" }];                // массив товаров*/
+    contact: Contacts = new Contacts();   
     dictSubjectMessage: DictSubjectMessage[];
-    /*subjectMessage: DictSubjectMessage = new DictSubjectMessage();*/
-    subjectMessage: string;
     contactModel: ContactModel = new ContactModel(new Contacts(), "", new Messages());
+    subjectMessage: string;
     message: string;
-    /*num: bigint = 100n;*/
-    tableMode: boolean = true;          // табличный режим
 
     constructor(private dataService: DataService) { }
 
+    // загрузка данных при старте компонента  
     ngOnInit() {
-        this.loadContact();    // загрузка данных при старте компонента  
+        this.loadContact();    
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
@@ -41,19 +36,9 @@ export class AppComponent implements OnInit {
             .subscribe((data: DictSubjectMessage[]) => this.dictSubjectMessage = data);
     }
 
-    createContact(contactModel: ContactModel, subjectId: string) {
+    createContact(subjectId: string) {
         this.contactModel.subjectId = subjectId;
         this.dataService.createContact(this.contactModel)
             .subscribe();
     }
-    // сохранение данных
-    //save() {
-    //    if (this.contact.id == null) {
-    //        this.dataService.createContact(this.contact)
-    //            .subscribe((data: Contacts) => this.contacts.push(data));
-    //    } else {
-    //        this.dataService.updateContact(this.contact)
-    //            .subscribe(data => this.loadProducts());
-    //    }
-    //}
 }

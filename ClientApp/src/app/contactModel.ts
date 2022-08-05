@@ -1,5 +1,4 @@
 ﻿import { Contacts } from './contacts';
-import { DictSubjectMessage } from './dictSubjectMessage';
 import { Messages } from './messages';
 
 export class ContactModel {

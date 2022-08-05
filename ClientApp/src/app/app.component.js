@@ -12,14 +12,12 @@ import { Messages } from './messages';
 let AppComponent = class AppComponent {
     constructor(dataService) {
         this.dataService = dataService;
-        this.contact = new Contacts(); // изменяемый товар
-        this.newContact = new Contacts(); // изменяемый товар
+        this.contact = new Contacts();
         this.contactModel = new ContactModel(new Contacts(), "", new Messages());
-        /*num: bigint = 100n;*/
-        this.tableMode = true; // табличный режим
     }
+    // загрузка данных при старте компонента  
     ngOnInit() {
-        this.loadContact(); // загрузка данных при старте компонента  
+        this.loadContact();
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
@@ -31,7 +29,7 @@ let AppComponent = class AppComponent {
         this.dataService.getDictSubjectMessage()
             .subscribe((data) => this.dictSubjectMessage = data);
     }
-    createContact(contactModel, subjectId) {
+    createContact(subjectId) {
         this.contactModel.subjectId = subjectId;
         this.dataService.createContact(this.contactModel)
             .subscribe();
