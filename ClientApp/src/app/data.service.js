@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 let DataService = class DataService {
     constructor(http) {
         this.http = http;
+        this.errorMessage = "";
         this.url = "/api/contacts";
     }
     getContacts() {

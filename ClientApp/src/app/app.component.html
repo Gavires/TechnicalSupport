@@ -1,55 +1,155 @@
 ﻿<!DOCTYPE html>
+<!--<script src="~/js/ShipmentRequest/Index.min.js" asp-append-version="true"></script>-->
+<!--<script type="text/javascript"></script>-->
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
 <html>
 <head>
     <meta charset="utf-8" />
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Angular in ASP.NET Core</title>
+    <title>TechnicalSupport</title>
 </head>
 <body>
-    <div>
-        <div class="form-group" style="width:50%">
-            <label>Ваше имя:</label>
-            <input class="form-control" name="name" [(ngModel)]="contactModel.contacts.name" #name="ngModel" required />
-            <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
-                Не указано имя
+    <div *ngIf="readFormCheck;then readForm else writeForm"></div>
+    <ng-template #readForm>
+        <div class="readForm mainForm">
+            <div class="exclamation"><p class="textExc">Напишите нам!</p></div>
+            <br /><br /><br /><br />
+            <table class="rForm">
+                <tr class="form-group">
+                    <td><label class="inline">Ваше имя:</label></td>
+                    <td>
+                        <input class="form-control inline" name="name" [(ngModel)]="contactModel.contacts.name" #name="ngModel" required />
+                        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+                            Не указано имя
+                        </div>
+                    </td>
+                </tr>
+                <tr class="form-group">
+                    <td><label>Ваш Email:</label></td>
+                    <td>
+                        <input class="form-control" name="email" [(ngModel)]="contactModel.contacts.email" #email="ngModel"
+                               required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+                        <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+                            Некорректный email
+                        </div>
+                    </td>
+                </tr>
+                <tr class="form-group">
+                    <td><label>Ваш Телефон:</label></td>
+                    <td>
+                        <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
+                               required pattern="[0-9]{10}" />
+                        <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
+                            Некорректный телефон
+                        </div>
+                    </td>
+                </tr>
+                <tr class="form-group"> 
+                    <td><label>Тема:</label></td>
+                    <td>
+                        <select class="form-control" name="DictSubjectUI" [(ngModel)]="subjectMessage">
+                            <option *ngFor="let item of DictSubjectUI" [value]="item.id">
+                                {{item.subject}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="form-group">
+                    <td><label>Сообщение:</label></td>
+                    <td>
+                        <input class="form-control" name="text" [(ngModel)]="contactModel.messages.text" #text="ngModel" required />
+                        <div [hidden]="text.valid || text.untouched" class="alert alert-danger">
+                            Напишите хоть строчку.......
+                        </div>
+                    </td>
+                </tr>
+                <tr class="form-group ">
+                    <td colspan="2" class="btnPush">
+                        <button [disabled]="name.invalid || email.invalid || phone.invalid || text.invalid" class="btn btn-default" (click)="createContact()">Отправить сообщение</button>
+                    </td>
+                </tr>
+            </table>
+
+            <!--<div class="form-group" style="width:100%">
+                <label class="inline">Ваше имя:</label>
+                <input class="form-control inline" name="name" [(ngModel)]="contactModel.contacts.name" #name="ngModel" required />
+                <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+                    Не указано имя
+                </div>
+            </div>
+            <div class="form-group" style="width:100%">
+                <label>Ваш Email:</label>
+                <input class="form-control" name="email" [(ngModel)]="contactModel.contacts.email" #email="ngModel"
+                       required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+                <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+                    Некорректный email
+                </div>
+            </div>
+            <div class="form-group" style="width:100%">
+                <label>Ваш Телефон:</label>
+                <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
+                       required pattern="[0-9]{10}" />
+                <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
+                    Некорректный телефон
+                </div>
+            </div>
+            <div class="form-group" style="width:100%">
+                <label>Тема:</label>
+                <select class="form-control" name="DictSubjectUI" [(ngModel)]="subjectMessage">
+                    <option *ngFor="let item of DictSubjectUI" [value]="item.id">
+                        {{item.subject}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group" style="width:100%">
+                <label>Сообщение:</label>
+                <input class="form-control" name="text" [(ngModel)]="contactModel.messages.text" #text="ngModel" required />
+                <div [hidden]="text.valid || text.untouched" class="alert alert-danger">
+                    Напишите хоть строчку.......
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="name.invalid || email.invalid || phone.invalid || text.invalid" class="btn btn-default" (click)="createContact()">Отправить сообщение</button>
+            </div>-->
+        </div>
+    </ng-template>
+
+    <ng-template #writeForm>
+        <div class="writeForm mainForm">
+            <table>
+                <tr>
+                    <td><label>Ваше имя:</label></td>
+                    <!--<td><input type="text" value={{contactModel.contacts.name}} /></td>-->
+                    <td>{{contactModel.contacts.name}}</td>
+                </tr>
+                <tr>
+                    <td><label>Ваш Email:</label></td>
+                    <!--<td><input type="text" value={{contactModel.contacts.email}} /></td>-->
+                    <td>{{contactModel.contacts.email}}</td>
+                </tr>
+                <tr>
+                    <td><label>Ваш Телефон:</label></td>
+                    <!--<td><input type="number" value={{contactModel.contacts.phone}} /></td>-->
+                    <td>{{contactModel.contacts.phone}}</td>
+                </tr>
+                <tr>
+                    <td><label>Тема:</label></td>
+                    <!--<td><input type="text" value={{contactModel.subject.subject}} /></td>-->
+                    <td>{{contactModel.subject.subject}} </td>
+                </tr>
+                <tr>
+                    <td><label>Сообщение:</label></td>
+                    <!--<td><input type="text" value={{contactModel.messages.text}} /></td>-->
+                    <td>{{contactModel.messages.text}}</td>
+                </tr>
+            </table>
+            <div>
+                <button class="btn btn-default" (click)="readFormMetod()">Создать новое обращение</button>
             </div>
         </div>
-        <div class="form-group">
-            <label>Ваш Email:</label>
-            <input class="form-control" name="email" [(ngModel)]="contactModel.contacts.email" #email="ngModel"
-                   required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
-            <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
-                Некорректный email
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Ваш Телефон:</label>
-            <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
-                   required pattern="[0-9]{10}" />
-            <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
-                Некорректный телефон
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Тема:</label>
-            <select #subject class="form-control" name="dictSubjectMessage" [(ngModel)]="subjectMessage">
-                <option *ngFor="let item of dictSubjectMessage" [value]="item.id">
-                    {{item.subject}}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Сообщение:</label>
-            <input class="form-control" name="text" [(ngModel)]="contactModel.messages.text" #text="ngModel" required />
-            <div [hidden]="text.valid || text.untouched" class="alert alert-danger">
-                Напишите хоть строчку.......
-            </div>
-        </div>
-        <div class="form-group">
-            <button [disabled]="name.invalid || email.invalid || phone.invalid"  class="btn btn-default" (click)="createContact(subjectMessage)">Добавить</button>
-            <!--<button class="btn btn-default">Добавить</button>-->
-        </div>
-    </div>
+    </ng-template>
 </body>
 </html>

@@ -1,5 +1,5 @@
-﻿namespace TechnicalSupport.Models {
-    public class Entity {
-        public long Id { get; set; }
-    }
+﻿using TechnicalSupport.Abstract.Long;
+
+namespace TechnicalSupport.Models {
+    public class Entity : EntityBase<long> { }
 }

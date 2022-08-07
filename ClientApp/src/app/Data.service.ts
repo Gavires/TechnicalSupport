@@ -6,6 +6,7 @@ import { ContactModel } from './contactModel';
 @Injectable()
 export class DataService {
 
+    errorMessage: String = "";
     private url = "/api/contacts";
 
     constructor(private http: HttpClient) { }

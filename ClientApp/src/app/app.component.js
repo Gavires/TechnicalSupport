@@ -7,39 +7,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { Contacts } from './contacts';
+import { DictSubjectUI } from './DictSubjectUI';
 import { ContactModel } from './contactModel';
 import { Messages } from './messages';
 let AppComponent = class AppComponent {
     constructor(dataService) {
         this.dataService = dataService;
         this.contact = new Contacts();
-        this.contactModel = new ContactModel(new Contacts(), "", new Messages());
+        this.contactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
+        this.readFormCheck = true;
     }
     // загрузка данных при старте компонента  
     ngOnInit() {
-        this.loadContact();
+        /*this.loadContact(); */
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
-    loadContact() {
+    loadcontactModelOld() {
         this.dataService.getContacts()
             .subscribe((data) => this.contact = data);
     }
+    loadContactModel() {
+        this.dataService.getContacts()
+            .subscribe((data) => this.contactModel = data);
+    }
     loadDictSubjectMessage() {
         this.dataService.getDictSubjectMessage()
-            .subscribe((data) => this.dictSubjectMessage = data);
+            .subscribe((data) => this.DictSubjectUI = data);
     }
-    createContact(subjectId) {
-        this.contactModel.subjectId = subjectId;
+    createContact() {
+        this.contactModel.subject.sublectId = this.subjectMessage;
+        this.readFormCheck = false;
         this.dataService.createContact(this.contactModel)
-            .subscribe();
+            .subscribe((data) => this.contactModel = data);
+    }
+    readFormMetod() {
+        this.readFormCheck = true;
+        this.contactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
+        /*this.ngOnInit();*/
     }
 };
 AppComponent = __decorate([
     Component({
         selector: 'app',
         templateUrl: './app.component.html',
-        providers: [DataService]
+        providers: [DataService],
+        styleUrls: ['./app.component.css']
     })
 ], AppComponent);
 export { AppComponent };

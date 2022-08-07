@@ -1,7 +1,7 @@
 export class ContactModel {
-    constructor(contacts, subjectId, messages) {
+    constructor(contacts, subject, messages) {
         this.contacts = contacts;
-        this.subjectId = subjectId;
+        this.subject = subject;
         this.messages = messages;
     }
 }

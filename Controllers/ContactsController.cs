@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TechnicalSupport.DataBase;
 using TechnicalSupport.Models;
+using TechnicalSupport.UI;
 
 namespace TechnicalSupport.Controllers {
 
@@ -53,12 +54,13 @@ namespace TechnicalSupport.Controllers {
         public IActionResult Post(ContactModel contactsModel) {
             if (ModelState.IsValid) {
                 var mess = new Messages {
-                    SubjectMessageId = long.Parse(contactsModel.SubjectId),
+                    SubjectMessageId = contactsModel.Subject.Id,
                     Text = contactsModel.Messages.Text
                 };
                 db.Messages.Add(mess);
                 db.SaveChanges();
                 contactsModel.Contacts.MessageId = mess.Id;
+                contactsModel.Subject.Subject = GetSubjectMessage(contactsModel.Subject.Id).Subject;
                 db.Contacts.Add(contactsModel.Contacts);
                 db.SaveChanges();
                 return Ok(contactsModel);
@@ -75,11 +77,13 @@ namespace TechnicalSupport.Controllers {
             }
             return BadRequest(ModelState);
         }
+        
+        public DictSubjectMessage GetSubjectMessage (long Id) => db.DictSubjectMessage.FirstOrDefault(x => x.Id == Id);
     }
     
     public class ContactModel {
         public Contacts Contacts { get; set; }
-        public string SubjectId { get; set; }
+        public DictSubjectUI Subject { get; set; }
         public Messages Messages { get; set; } 
     }
 }
