@@ -23,9 +23,7 @@ import { error } from '@angular/compiler/src/util';
 
     constructor(private dataService: DataService) { }
 
-    // загрузка данных при старте компонента  
     ngOnInit() {
-        /*this.loadContact(); */
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
@@ -53,16 +51,12 @@ import { error } from '@angular/compiler/src/util';
         this.contactModel.subject.sublectId = this.subjectMessage;
         this.dataService.createContact(this.contactModel)
             .subscribe(
-                (data: ContactModel) => this.contactModel = data, (error) => this.errorMessage);
-                
-        if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-        }
+                (data: ContactModel) => this.contactModel = data);
+        this.readFormCheck = false;
     }
 
     readFormMetod() {
         this.readFormCheck = true;
         this.contactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
-        /*this.ngOnInit();*/
     }
 }

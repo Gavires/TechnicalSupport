@@ -17,9 +17,7 @@ let AppComponent = class AppComponent {
         this.contactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
         this.readFormCheck = true;
     }
-    // загрузка данных при старте компонента  
     ngOnInit() {
-        /*this.loadContact(); */
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
@@ -42,15 +40,12 @@ let AppComponent = class AppComponent {
     createContact() {
         this.contactModel.subject.sublectId = this.subjectMessage;
         this.dataService.createContact(this.contactModel)
-            .subscribe((data) => this.contactModel = data, (error) => this.errorMessage);
-        if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-        }
+            .subscribe((data) => this.contactModel = data);
+        this.readFormCheck = false;
     }
     readFormMetod() {
         this.readFormCheck = true;
         this.contactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
-        /*this.ngOnInit();*/
     }
 };
 AppComponent = __decorate([

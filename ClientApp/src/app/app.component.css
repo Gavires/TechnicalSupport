@@ -16,7 +16,7 @@
 }
 
 .mainForm {
-    width: auto; /* Ширина таблицы */
+    width: auto; 
     height: auto;
     padding: 1em;
     border-radius: 10px;
@@ -25,15 +25,15 @@
 }
 
 .rForm, .wrForm {
-    border: 0px solid Grey; /* Прячем рамку вокруг таблицы */
+    border: 0px solid Grey; 
     table-layout: fixed;
     border-spacing: 15px, 20px;
 }
 
 .rForm, wrForm td:not(.btnPush) {
-    padding: 5px; /* Поля вокруг содержимого таблицы */
-    border: 0px solid Grey; /* Параметры рамки */
-    text-align: left; /* Выравнивание по левому краю */
+    padding: 5px; 
+    border: 0px solid Grey; 
+    text-align: left; 
 }
 
 .rForm td:nth-child(2) {
@@ -41,8 +41,8 @@
 }
 
 .btnPush {
-    padding: 5px; /* Поля вокруг содержимого таблицы */
-    border: 0px solid Grey; /* Параметры рамки */
+    padding: 5px; 
+    border: 0px solid Grey; 
     text-align: center;
 }
 

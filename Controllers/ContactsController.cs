@@ -93,7 +93,7 @@ namespace TechnicalSupport.Controllers {
         public DictSubjectMessage GetSubjectMessage(long Id) => db.DictSubjectMessage.FirstOrDefault(x => x.Id == Id);
 
         private void CheckEmailAndNumber(ContactModel model) {
-            Regex regex = new Regex(@"^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+            Regex regex = new Regex(@"[0-9]{10}");
             MatchCollection matches = regex.Matches(model.Contacts.Phone.ToString());
             if (matches.Count == 0)
                 throw new Exception("Некорректный номер телефона!");
