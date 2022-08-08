@@ -23,6 +23,10 @@ export class DataService {
         return this.http.get(this.url + '/' + "getDictSubjectMessage");
     }
 
+    getErrorLog() {
+        return this.http.get(this.url + '/' + "Log");
+    }
+
     createContact(contactsModel: ContactModel) {
         return this.http.post(this.url, contactsModel);
     }

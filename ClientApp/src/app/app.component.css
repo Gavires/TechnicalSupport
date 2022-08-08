@@ -24,21 +24,21 @@
     box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
 }
 
-.rForm {
+.rForm, .wrForm {
     border: 0px solid Grey; /* Прячем рамку вокруг таблицы */
     table-layout: fixed;
     border-spacing: 15px, 20px;
 }
 
-    .rForm td:not(.btnPush) {
-        padding: 5px; /* Поля вокруг содержимого таблицы */
-        border: 0px solid Grey; /* Параметры рамки */
-        text-align: left; /* Выравнивание по левому краю */
-    }
+.rForm, wrForm td:not(.btnPush) {
+    padding: 5px; /* Поля вокруг содержимого таблицы */
+    border: 0px solid Grey; /* Параметры рамки */
+    text-align: left; /* Выравнивание по левому краю */
+}
 
-    .rForm td:nth-child(2) {
-        width: 400px;
-    }
+.rForm td:nth-child(2) {
+    width: 400px;
+}
 
 .btnPush {
     padding: 5px; /* Поля вокруг содержимого таблицы */
@@ -50,7 +50,6 @@
     font-family: Arial;
     font-size: x-large;
 }
-
 
 .exclamation {
     position: absolute;

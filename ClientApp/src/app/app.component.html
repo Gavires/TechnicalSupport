@@ -12,6 +12,7 @@
     <title>TechnicalSupport</title>
 </head>
 <body>
+    <div class="alert alert-danger animate-show" role="alert" ng-show="errorMessage != null">{{ errorMessage }} </div>
     <div *ngIf="readFormCheck;then readForm else writeForm"></div>
     <ng-template #readForm>
         <div class="readForm mainForm">
@@ -24,7 +25,7 @@
                         <input class="form-control inline" name="name" [(ngModel)]="contactModel.contacts.name" #name="ngModel" required />
                         <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
                             Не указано имя
-                        </div>
+                        </div> <br />
                     </td>
                 </tr>
                 <tr class="form-group">
@@ -40,14 +41,14 @@
                 <tr class="form-group">
                     <td><label>Ваш Телефон:</label></td>
                     <td>
-                        <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
-                               required pattern="[0-9]{10}" />
+                        <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel" />
+                        <!--required pattern="[0-9]{10}" />-->
                         <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
                             Некорректный телефон
                         </div>
                     </td>
                 </tr>
-                <tr class="form-group"> 
+                <tr class="form-group">
                     <td><label>Тема:</label></td>
                     <td>
                         <select class="form-control" name="DictSubjectUI" [(ngModel)]="subjectMessage">
@@ -119,34 +120,29 @@
 
     <ng-template #writeForm>
         <div class="writeForm mainForm">
-            <table>
+            <table class="wrForm">
                 <tr>
                     <td><label>Ваше имя:</label></td>
-                    <!--<td><input type="text" value={{contactModel.contacts.name}} /></td>-->
                     <td>{{contactModel.contacts.name}}</td>
                 </tr>
                 <tr>
                     <td><label>Ваш Email:</label></td>
-                    <!--<td><input type="text" value={{contactModel.contacts.email}} /></td>-->
                     <td>{{contactModel.contacts.email}}</td>
                 </tr>
                 <tr>
                     <td><label>Ваш Телефон:</label></td>
-                    <!--<td><input type="number" value={{contactModel.contacts.phone}} /></td>-->
                     <td>{{contactModel.contacts.phone}}</td>
                 </tr>
                 <tr>
                     <td><label>Тема:</label></td>
-                    <!--<td><input type="text" value={{contactModel.subject.subject}} /></td>-->
                     <td>{{contactModel.subject.subject}} </td>
                 </tr>
                 <tr>
                     <td><label>Сообщение:</label></td>
-                    <!--<td><input type="text" value={{contactModel.messages.text}} /></td>-->
                     <td>{{contactModel.messages.text}}</td>
                 </tr>
             </table>
-            <div>
+            <div colspan="2" class="btnPush">
                 <button class="btn btn-default" (click)="readFormMetod()">Создать новое обращение</button>
             </div>
         </div>

@@ -20,6 +20,9 @@ let DataService = class DataService {
     getDictSubjectMessage() {
         return this.http.get(this.url + '/' + "getDictSubjectMessage");
     }
+    getErrorLog() {
+        return this.http.get(this.url + '/' + "Log");
+    }
     createContact(contactsModel) {
         return this.http.post(this.url, contactsModel);
     }

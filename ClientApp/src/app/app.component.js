@@ -35,11 +35,17 @@ let AppComponent = class AppComponent {
         this.dataService.getDictSubjectMessage()
             .subscribe((data) => this.DictSubjectUI = data);
     }
+    loadErrorLog() {
+        this.dataService.getErrorLog()
+            .subscribe((data) => this.errorMessage = data);
+    }
     createContact() {
         this.contactModel.subject.sublectId = this.subjectMessage;
-        this.readFormCheck = false;
         this.dataService.createContact(this.contactModel)
-            .subscribe((data) => this.contactModel = data);
+            .subscribe((data) => this.contactModel = data, (error) => this.errorMessage);
+        if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+        }
     }
     readFormMetod() {
         this.readFormCheck = true;

@@ -4,6 +4,7 @@ import { Contacts } from './contacts';
 import { DictSubjectUI } from './DictSubjectUI';
 import { ContactModel } from './contactModel';
 import { Messages } from './messages';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app',
@@ -11,20 +12,20 @@ import { Messages } from './messages';
     providers: [DataService],
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+    export class AppComponent implements OnInit {
 
     contact: Contacts = new Contacts();   
     DictSubjectUI: DictSubjectUI[];
     contactModel: ContactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
     subjectMessage: string;
-    message: string;
+    errorMessage: string;
     readFormCheck: boolean = true;
 
     constructor(private dataService: DataService) { }
 
     // загрузка данных при старте компонента  
     ngOnInit() {
-        /*this.loadContact(); */   
+        /*this.loadContact(); */
         this.loadDictSubjectMessage();
     }
     // получаем данные через сервис
@@ -43,11 +44,20 @@ export class AppComponent implements OnInit {
             .subscribe((data: DictSubjectUI[]) => this.DictSubjectUI = data);
     }
 
+    loadErrorLog() {
+        this.dataService.getErrorLog()
+            .subscribe((data: string) => this.errorMessage = data)
+    }
+
     createContact() {
         this.contactModel.subject.sublectId = this.subjectMessage;
-        this.readFormCheck = false;
         this.dataService.createContact(this.contactModel)
-            .subscribe((data: ContactModel) => this.contactModel = data);
+            .subscribe(
+                (data: ContactModel) => this.contactModel = data, (error) => this.errorMessage);
+                
+        if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+        }
     }
 
     readFormMetod() {
