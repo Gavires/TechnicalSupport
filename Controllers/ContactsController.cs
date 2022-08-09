@@ -19,9 +19,9 @@ namespace TechnicalSupport.Controllers {
         public ContactsController(DataBaseContext _db) {
             db = _db;
             if (!db.Contacts.Any()) {
-                db.Contacts.Add(new Contacts { Name = "Igor", Email = "Igor@ya.ru", Phone = 896062 });
-                db.Contacts.Add(new Contacts { Name = "Dmitry", Email = "Dmitry@ya.ru", Phone = 895265 });
-                db.Contacts.Add(new Contacts { Name = "Sanya", Email = "Sanya@ya.ru", Phone = 894068 });
+                db.Contacts.Add(new Contacts { Name = "Igor", Email = "Igor@ya.ru", Phone = 9606217879 });
+                db.Contacts.Add(new Contacts { Name = "Dmitry", Email = "Dmitry@ya.ru", Phone = 9526531565 });
+                db.Contacts.Add(new Contacts { Name = "Sanya", Email = "Sanya@ya.ru", Phone = 9406884554 });
                 db.SaveChanges();
             }
 
