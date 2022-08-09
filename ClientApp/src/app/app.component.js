@@ -38,10 +38,11 @@ let AppComponent = class AppComponent {
             .subscribe((data) => this.errorMessage = data);
     }
     createContact() {
+        this.errorMessage = null;
         this.contactModel.subject.sublectId = this.subjectMessage;
         this.dataService.createContact(this.contactModel)
-            .subscribe((data) => this.contactModel = data);
-        this.readFormCheck = false;
+            .subscribe((data) => this.contactModel = data, (error) => this.errorMessage = error.error, () => this.readFormCheck = false);
+        ;
     }
     readFormMetod() {
         this.readFormCheck = true;

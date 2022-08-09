@@ -12,7 +12,7 @@
     <title>TechnicalSupport</title>
 </head>
 <body>
-    <!--<div class="alert alert-danger animate-show" role="alert" ng-show="errorMessage != null">{{ errorMessage }} </div>-->
+    <div class="alert alert-danger animate-show" role="alert" [hidden]="errorMessage == null">{{ errorMessage }} </div>
     <div *ngIf="readFormCheck;then readForm else writeForm"></div>
     <ng-template #readForm>
         <div class="readForm mainForm">
@@ -41,7 +41,7 @@
                 <tr class="form-group">
                     <td><label>Ваш Телефон:</label></td>
                     <td>
-                        <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel" 
+                        <input type="number" class="form-control" name="phone" [(ngModel)]="contactModel.contacts.phone" #phone="ngModel"
                         required pattern="[0-9]{10}" />
                         <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
                             Некорректный телефон

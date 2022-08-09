@@ -87,3 +87,12 @@
         transform: scale(1.95);
         
     }
+
+.error {
+    border: 2px solid #f08d3c;
+    color: #f08d3c;
+}
+
+    .error:before {
+        content: "\f12a";
+    }

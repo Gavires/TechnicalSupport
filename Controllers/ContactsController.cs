@@ -99,6 +99,18 @@ namespace TechnicalSupport.Controllers {
                 throw new Exception("Некорректный номер телефона!");
             if (!new EmailAddressAttribute().IsValid(model.Contacts.Email))
                 throw new Exception("Формат Email неверный!");
+            var contacts = from c in db.Contacts
+                           where c.Email == model.Contacts.Email && c.Phone == model.Contacts.Phone
+                           select new Contacts {
+                               Id = c.Id,
+                               Name = c.Name,
+                               Email = c.Email,
+                               MessageId = c.MessageId,
+                               Phone = c.Phone
+                           }; 
+            if (contacts.Any()) {
+                throw new Exception("Вы уже отправляли письмо с этого адреса и номера телефона!");
+            }
         }
     }
 

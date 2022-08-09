@@ -4,7 +4,6 @@ import { Contacts } from './contacts';
 import { DictSubjectUI } from './DictSubjectUI';
 import { ContactModel } from './contactModel';
 import { Messages } from './messages';
-import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app',
@@ -12,9 +11,9 @@ import { error } from '@angular/compiler/src/util';
     providers: [DataService],
     styleUrls: ['./app.component.css']
 })
-    export class AppComponent implements OnInit {
+export class AppComponent implements OnInit {
 
-    contact: Contacts = new Contacts();   
+    contact: Contacts = new Contacts();
     DictSubjectUI: DictSubjectUI[];
     contactModel: ContactModel = new ContactModel(new Contacts(), new DictSubjectUI(), new Messages());
     subjectMessage: string;
@@ -48,11 +47,12 @@ import { error } from '@angular/compiler/src/util';
     }
 
     createContact() {
+        this.errorMessage = null;
         this.contactModel.subject.sublectId = this.subjectMessage;
         this.dataService.createContact(this.contactModel)
             .subscribe(
-                (data: ContactModel) => this.contactModel = data);
-        this.readFormCheck = false;
+                (data: ContactModel) => this.contactModel = data, (error) => this.errorMessage = error.error, () => this.readFormCheck = false);
+        ;
     }
 
     readFormMetod() {
